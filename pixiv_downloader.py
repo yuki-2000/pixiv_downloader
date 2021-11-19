@@ -73,7 +73,7 @@ for user_id in client_info["ids"]:
         print(user_id)
         print(user_detail.error)
 
-        sleep(5)
+        sleep(60)
         #ここ関数化したら使えない
         continue
     
@@ -384,13 +384,13 @@ for user_id in client_info["ids"]:
                 if finish_flag == True:
                    break
                
-                #sleep(1)
+                sleep(1)
                 next_qs = aapi.parse_qs(user_illusts.next_url)
                 if next_qs == None:
                     break
                     
                 else:
-                    #sleep(1)
+                    sleep(1)
                     user_illusts = aapi.user_illusts(**next_qs)
                        
 
@@ -399,7 +399,7 @@ for user_id in client_info["ids"]:
                 print("error")
                 import traceback
                 traceback.print_exc()
-                sleep(30)
+                sleep(60)
                 break
                 #continueだとuser_illustsを新たにとってこれずエラーて回るのでbreakで次のユーザーにまわしちゃう
 
