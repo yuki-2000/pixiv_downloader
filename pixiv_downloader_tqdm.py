@@ -78,7 +78,7 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
         #print(user_detail.error)
         tqdm.write(str(user_id))
         tqdm.write(str(user_detail.error))
-        sleep(5)
+        sleep(60)
         #ここ関数化したら使えない
         continue
 
@@ -415,7 +415,7 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
                 #print("error")
                 import traceback
                 traceback.print_exc()
-                sleep(30)
+                sleep(60)
                 break
                 #continueだとuser_illustsを新たにとってこれずエラーて回るのでbreakで次のユーザーにまわしちゃう
                 #continue
