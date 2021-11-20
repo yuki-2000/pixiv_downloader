@@ -1,4 +1,4 @@
-# pixiv_downloader
+# pixiv_downloader2.0
 pythonのライブラリ「pixivpyを使用した」ダウンローダー
 
 ## 環境
