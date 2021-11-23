@@ -132,7 +132,7 @@ for user_id in client_info["ids"]:
         finish_flag=False
 
         #こちらでもいいが、めんどくさいのでwhile Trueで無限に回す
-        #for i in range(total_works//30+1)
+        #for i in range(total_works//30)
         
         #こことってこれないとぐるぐる回る
         user_illusts = aapi.user_illusts(user_id)
