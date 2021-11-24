@@ -21,6 +21,7 @@ import cv2
 import numpy as np
 from tqdm import tqdm
 #https://www.kimoton.com/entry/20190830/1567128952
+import re
 
 #client.jsonの読み込み処理
 f = open("client.json", "r")
