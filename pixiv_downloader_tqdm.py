@@ -68,7 +68,7 @@ exclude_tags = ["R-18"]#一つでもかぶっていればダウンロードし�
 #for user_id in tqdm([11,12848282], desc='users', leave=False):
 for user_id in tqdm(client_info["ids"], desc='users', leave=False):
     
-    sleep(1)
+    sleep(10)
     user_detail = aapi.user_detail(user_id)
     
 
