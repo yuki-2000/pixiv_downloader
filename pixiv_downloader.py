@@ -18,6 +18,7 @@ from time import sleep
 import zipfile
 import cv2
 import numpy as np
+import re
 
 
 #client.jsonの読み込み処理
