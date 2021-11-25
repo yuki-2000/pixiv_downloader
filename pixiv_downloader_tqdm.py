@@ -267,6 +267,8 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
                             
                         #jpg以外の画像あるのかわからない
                         frames = glob.glob(f'{dir_name}/*.jpg')
+                        frames += glob.glob(f'{dir_name}/*.jpeg')
+                        frames += glob.glob(f'{dir_name}/*.png')
                         #https://note.nkmk.me/python-sort-num-str/
                         frames.sort(key=lambda s: int(re.findall(r'\d+', s)[-1]))
                         #frames.sort(key=os.path.getmtime, reverse=False)
