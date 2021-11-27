@@ -346,7 +346,7 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
                                 </script>
                             </body>
                             </html>
-                            """.format(width=width, height=height, frames=ugoira_frames, illust_id=illust_id, delay=ugoira_delay)
+                            """.format(width=width, height=height, frames=ugoira_frames, illust_id=illust_id, delay=ugoira_delay, paths_json=paths_json)
                             with open(f'{dir_name}/ugoira.html', 'w', encoding='utf-8') as f:
                                 f.write(html)
                                 
