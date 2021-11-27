@@ -298,6 +298,8 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
                                 #numpyで開いてopencvに渡すことで全角文字のパスでも動く
                                 buf = np.fromfile(frame, np.uint8)
                                 img = cv2.imdecode(buf, cv2.IMREAD_UNCHANGED)
+                                if img.shape[2] == 4:
+                                    img = np.delete(img, 3, axis=2)
                                 #img = cv2.imread(frame)
                                 video.write(img)
                             
@@ -308,6 +310,9 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
                         #ローカルを参照するhtml
                         #https://qiita.com/choshicure/items/8795bf929e34af6622fc
                         if ugoira_html == True:
+
+                            paths_json = json.dumps(frames)
+
                             html = """
                             <!DOCTYPE html>
                             <html lang="en">
@@ -319,12 +324,14 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
                             <body>
                                 <canvas id="ugoira" width="{width}" height="{height}"></canvas>
                                 <script>
-                                    const images = [];
-                                    for(let i=0; i<{frames}; i++){{
-                                        const img = new Image();
-                                        img.src = `./{illust_id}_ugoira${{i}}.jpg`;
-                                        images.push(img);
-                                    }}
+
+                                    const paths = {paths_json};
+                                    const images = paths.map(path => {{
+                                        const image = new Image();
+                                        image.src = path;
+                                        return image;
+                                        }});
+
                                     const canvas = document.querySelector('#ugoira');
                                     const context = canvas.getContext('2d');
                                     let count = 0;
