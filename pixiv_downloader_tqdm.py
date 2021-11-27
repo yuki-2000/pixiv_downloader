@@ -298,6 +298,8 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
                                 #numpyで開いてopencvに渡すことで全角文字のパスでも動く
                                 buf = np.fromfile(frame, np.uint8)
                                 img = cv2.imdecode(buf, cv2.IMREAD_UNCHANGED)
+                                if img.shape[2] == 4:
+                                    img = np.delete(img, 3, axis=2)
                                 #img = cv2.imread(frame)
                                 video.write(img)
                             
