@@ -310,6 +310,9 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
                         #ローカルを参照するhtml
                         #https://qiita.com/choshicure/items/8795bf929e34af6622fc
                         if ugoira_html == True:
+
+                            paths_json = json.dumps(frames)
+
                             html = """
                             <!DOCTYPE html>
                             <html lang="en">
@@ -321,12 +324,14 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
                             <body>
                                 <canvas id="ugoira" width="{width}" height="{height}"></canvas>
                                 <script>
-                                    const images = [];
-                                    for(let i=0; i<{frames}; i++){{
-                                        const img = new Image();
-                                        img.src = `./{illust_id}_ugoira${{i}}.jpg`;
-                                        images.push(img);
-                                    }}
+
+                                    const paths = {paths_json};
+                                    const images = paths.map(path => {{
+                                        const image = new Image();
+                                        image.src = path;
+                                        return image;
+                                        }});
+
                                     const canvas = document.querySelector('#ugoira');
                                     const context = canvas.getContext('2d');
                                     let count = 0;
