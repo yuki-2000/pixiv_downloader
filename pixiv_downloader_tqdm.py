@@ -115,7 +115,8 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
             local_user_name = os.path.basename(local_dir).rsplit("(", 1)[0]
             if local_user_id == str(user_id):
                 if user_name != local_user_name:
-                    print(local_dir + " を次に変更 " + saving_direcory_path)
+                    #print(local_dir + " を次に変更 " + saving_direcory_path)
+                    tqdm.write(local_dir + " を次に変更 " + saving_direcory_path)
                     os.rename(local_dir, saving_direcory_path)
                     sleep(3)
                 break
