@@ -54,9 +54,7 @@ main_saving_direcory_path = "./img/"
 ugoira_gif  = True
 #画質良、ファイルサイズ小、ループしない（再生ソフト次第）、保存場所は直下
 ugoira_mp4  = True
-#画質最高（劣化なし）、ファイルサイズ小、ループ、ファイル移動できない（元の画像を参照しているため）、保存場所はugoiraフォルダ内
-ugoira_html = True
-#画質最高（劣化なし）、ループ、ファイルサイズ大、移動可、保存場所はugoiraフォルダ内
+#画質最高（劣化なし）、ループ、ファイルサイズ大、移動可、保存場所はugoiraフォルダ内、delayが正確
 html_onefile = True
 
 #Filter by tag　e.g. target_tag = ["Fate/GrandOrder","FGO","FateGO","Fate/staynight"]
@@ -308,48 +306,7 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
                             #print('written')
                             
                             
-                        #ローカルを参照するhtml
-                        #https://qiita.com/choshicure/items/8795bf929e34af6622fc
-                        if ugoira_html == True:
 
-                            paths_json = json.dumps(frames)
-
-                            html = """
-                            <!DOCTYPE html>
-                            <html lang="en">
-                            <head>
-                                <meta charset="UTF-8">
-                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                                <title>Document</title>
-                            </head>
-                            <body>
-                                <canvas id="ugoira" width="{width}" height="{height}"></canvas>
-                                <script>
-
-                                    const paths = {paths_json};
-                                    const images = paths.map(path => {{
-                                        const image = new Image();
-                                        image.src = path;
-                                        return image;
-                                        }});
-
-                                    const canvas = document.querySelector('#ugoira');
-                                    const context = canvas.getContext('2d');
-                                    let count = 0;
-                                    window.addEventListener('load', function(){{
-                                        setInterval(function(){{
-                                            context.clearRect(0, 0, canvas.width, canvas.height);
-                                            context.drawImage(images[count], 0, 0);
-                                            count++;
-                                            if(count>={frames}) count=0;
-                                        }}, {delay});
-                                    }});
-                                </script>
-                            </body>
-                            </html>
-                            """.format(width=width, height=height, frames=ugoira_frames, illust_id=illust_id, delay=ugoira_delay, paths_json=paths_json)
-                            with open(f'{dir_name}/ugoira.html', 'w', encoding='utf-8') as f:
-                                f.write(html)
                                 
                                 
                         #一つのファイルにまとめたhtml
