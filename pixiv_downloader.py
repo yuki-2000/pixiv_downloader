@@ -341,9 +341,10 @@ for user_id in client_info["ids"]:
                             import base64
                             illust_b64 = []
                             img_ext = frames[0].split('.')[-1]
-                            for frame in frames:
+                            for num, frame in enumerate(frames):
                                 with open(frame, 'rb') as f:
-                                    illust_b64.append(f'data:image/{img_ext};base64,{base64.b64encode(f.read()).decode()}')
+                                    illust_b64.append([f'data:image/{img_ext};base64,{base64.b64encode(f.read()).decode()}', ugoira.ugoira_metadata.frames[num]['delay']])
+
                             html = """
                             <!DOCTYPE html>
                             <html lang="en">
@@ -359,24 +360,23 @@ for user_id in client_info["ids"]:
                                     const images = [];
                                     for(let i=0; i<{frames}; i++){{
                                         const img = new Image();
-                                        img.src = illust_b64[i];
-                                        images.push(img);
+                                        img.src = illust_b64[i][0];
+                                        images.push([img, illust_b64[i][1]]);
                                     }}
                                     const canvas = document.querySelector('#ugoira');
                                     const context = canvas.getContext('2d');
                                     let count = 0;
-                                    window.addEventListener('load', function(){{
-                                        setInterval(function(){{
-                                            context.clearRect(0, 0, canvas.width, canvas.height);
-                                            context.drawImage(images[count], 0, 0);
-                                            count++;
-                                            if(count>={frames}) count=0;
-                                        }}, {delay});
-                                    }});
+                                    const drawImage = (index) => {{
+                                        if(index>={frames}) index=0;
+                                        context.clearRect(0, 0, canvas.width, canvas.height);
+                                        context.drawImage(images[index][0], 0, 0);
+                                        setTimeout(drawImage, images[index][1], index+1)
+                                    }};
+                                    window.addEventListener('load', () => drawImage(0));
                                 </script>
                             </body>
                             </html>
-                            """.format(width=width, height=height, frames=ugoira_frames, illust_id=illust_id, delay=ugoira_delay, illust_b64=str(illust_b64))
+                            """.format(width=width, height=height, frames=ugoira_frames, illust_id=illust_id, illust_b64=str(illust_b64))
                             with open(f'{dir_name}/ugoira_onefile.html', 'w', encoding='utf-8') as f:
                                 f.write(html)
 
@@ -419,7 +419,6 @@ for user_id in client_info["ids"]:
         print("-----------------------------")
         print("Download complete!　Thanks to {:<10}".format(user_id) + user_name)
         print()
-
 
 
 
