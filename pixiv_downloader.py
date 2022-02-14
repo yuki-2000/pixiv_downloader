@@ -21,6 +21,26 @@ import numpy as np
 import re
 
 
+#https://qiita.com/yuki_2020/items/cdab3b0ce451bc9e3179
+def rename_for_windows(name):
+    while True:
+        tmp = name
+        #半角文字の削除        
+        name = name.translate((str.maketrans({'\a':'','\b':'','\f':'','\n':'','\r':'','\t':'','\v':'',"\'":"'",'\"':'"','\0':''})))    
+        #エスケープシーケンスを削除
+        name = name.translate((str.maketrans({'\\':'￥','/': '／' , ':': '：', '*': '＊', '?': '？', '"': "”", '>': '＞', '<': '＜', '|': '｜'})))
+        #先頭/末尾のドットの削除 
+        name = name.strip(".")
+        #先頭/末尾の半角スペースを削除
+        name = name.strip(" ")
+        #先頭/末尾の全角スペースを削除
+        name = name.strip("　")
+
+        if name == tmp:
+            break
+
+    return name
+
 #client.jsonの読み込み処理
 f = open("client.json", "r")
 client_info = json.load(f)
@@ -86,19 +106,7 @@ for user_id in client_info["ids"]:
 
         #フォルダパス作成
         directory_user_name = user_name
-        #エスケープシーケンスを削除
-        #https://pg-chain.com/python-escape
-        directory_user_name = directory_user_name.translate((str.maketrans({'\n': '','\0': '','\t': '','\r': '',"\'": "'",'\"': '"', '\\':''})))
-        #windowsで使えるフォルダ名に変更
-        #https://www.itc.u-toyama.ac.jp/el/win7/restricted.html
-        directory_user_name = directory_user_name.translate((str.maketrans({'/': '／' , ':': '：', '*': '＊', '?': '？', '"': "”", '>': '＞', '<': '＜', '|': '｜'})))
-        #https://all.undo.jp/asr/1st/document/01_03.html
-        #先頭ドット、末尾ドット
-        directory_user_name = directory_user_name.strip(".")
-        #半角スペース
-        directory_user_name = directory_user_name.strip(" ")
-        #全角スペース
-        directory_user_name = directory_user_name.strip("　")
+        directory_user_name = rename_for_windows(directory_user_name)
         saving_direcory_path = main_saving_direcory_path + directory_user_name + ("(") +str(user_id) + (")") + "/"
 
         #フォルダ名アップデート
