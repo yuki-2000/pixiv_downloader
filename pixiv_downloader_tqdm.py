@@ -82,7 +82,7 @@ html_onefile = True
 #Filter by tag　e.g. target_tag = ["Fate/GrandOrder","FGO","FateGO","Fate/staynight"]
 select_tags = [] #同じtag内に複数書くと少なくとも一つあればダウンロード
 select_tags2 = []#異なるタグ間のタグはすべて含まれていないとダウンロードされない
-exclude_tags = ["R-18"]#一つでもかぶっていればダウンロードしない
+exclude_tags = ["R-18","R-18G"]#一つでもかぶっていればダウンロードしない
 
 
 #ここから各イラストレーターさんごとの処理
