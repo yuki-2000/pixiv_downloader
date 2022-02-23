@@ -360,11 +360,9 @@ for user_id in client_info["ids"]:
                 if finish_flag == True:
                    break
                
-                sleep(1)
                 next_qs = aapi.parse_qs(user_illusts.next_url)
                 if next_qs == None:
-                    break
-                    
+                    break                    
                 else:
                     sleep(1)
                     user_illusts = aapi.user_illusts(**next_qs)
