@@ -152,7 +152,7 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
         
         
         #こことってこれないとぐるぐる回る
-        user_illusts = aapi.user_illusts(user_id)
+        user_illusts = aapi.user_illusts(user_id, type="")
         #こちらでもいいが、めんどくさいのでwhile Trueで無限に回す
         for i in tqdm(range(total_works//30), desc='pages', leave=False):
         #while True:
@@ -218,7 +218,7 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
 
 
 
-                    if illust.type == "illust":
+                    if illust.type == "illust" or illust.type == "manga":
                         if illust.page_count == 1:
                             aapi.download(illust.meta_single_page.original_image_url, saving_direcory_path)
                         else:

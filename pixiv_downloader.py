@@ -142,7 +142,7 @@ for user_id in client_info["ids"]:
         #for i in range(total_works//30)
         
         #こことってこれないとぐるぐる回る
-        user_illusts = aapi.user_illusts(user_id)
+        user_illusts = aapi.user_illusts(user_id, type="")
         while True:
             try:
 
@@ -200,7 +200,7 @@ for user_id in client_info["ids"]:
 
 
 
-                    if illust.type == "illust":
+                    if illust.type == "illust" or illust.type == "manga":
                         if illust.page_count == 1:
                             aapi.download(illust.meta_single_page.original_image_url, saving_direcory_path)
                         else:
