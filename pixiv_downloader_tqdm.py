@@ -152,7 +152,7 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
         
         
         #こことってこれないとぐるぐる回る
-        user_illusts = aapi.user_illusts(user_id, type="")
+        user_illusts = aapi.user_illusts(user_id, type=None)
         #こちらでもいいが、めんどくさいのでwhile Trueで無限に回す
         for i in tqdm(range(total_works//30), desc='pages', leave=False):
         #while True:

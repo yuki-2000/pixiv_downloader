@@ -142,7 +142,7 @@ for user_id in client_info["ids"]:
         #for i in range(total_works//30)
         
         #こことってこれないとぐるぐる回る
-        user_illusts = aapi.user_illusts(user_id, type="")
+        user_illusts = aapi.user_illusts(user_id, type=None)
         while True:
             try:
 
