@@ -235,6 +235,8 @@ for user_id in client_info["ids"]:
                         #うごイラに使われているすべての画像のダウンロード(オリジナル) 
                         #高画質低速
                         for frame in range(ugoira_frames):
+                            if os.path.exists(f'{dir_name}/{illust_id}_ugoira{frame}{ugoira_url[1]}'):
+                                continue
                             frame_url = ugoira_url[0] + str(frame) + ugoira_url[1]
                             aapi.download(frame_url, path=dir_name)
                             sleep(1)
