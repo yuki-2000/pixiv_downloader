@@ -360,7 +360,7 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
                             </body>
                             </html>
                             """.format(width=width, height=height, frames=ugoira_frames, illust_id=illust_id, illust_b64=str(illust_b64))
-                            with open(f'{dir_name}/ugoira_onefile.html', 'w', encoding='utf-8') as f:
+                            with open(f'{saving_direcory_path}/{illust_id}.html', 'w', encoding='utf-8') as f:
                                 f.write(html)
 
                             
