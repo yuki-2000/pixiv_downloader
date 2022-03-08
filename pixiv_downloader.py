@@ -176,14 +176,16 @@ for user_id in client_info["ids"]:
                     #https://www.pixiv.help/hc/ja/articles/235584428-pixiv%E3%81%AB%E6%8A%95%E7%A8%BF%E3%81%A7%E3%81%8D%E3%82%8B%E7%94%BB%E5%83%8F%E3%81%AE%E7%A8%AE%E9%A1%9E%E3%82%92%E7%9F%A5%E3%82%8A%E3%81%9F%E3%81%84   
                     file_name_head = saving_direcory_path + str(illust.id)+"_p" + str(illust.page_count-1) 
 
-                    if os.path.exists(file_name_head+".png") or os.path.exists(file_name_head+".jpg") or os.path.exists(file_name_head+".jpeg") or os.path.exists(file_name_head+".gif") or os.path.exists(saving_direcory_path+str(illust.id)+'_ugoira'):
+                    if os.path.exists(file_name_head+".png") or os.path.exists(file_name_head+".jpg") or os.path.exists(file_name_head+".jpeg") or os.path.exists(file_name_head+".gif"):
                         print("--------------------------------")
                         print("Title:"+str(illust.title)+" has already downloaded.")
                         continue
                     
-                    
-
-
+                    file_name_head = saving_direcory_path + str(illust.id)
+                    if (ugoira_gif==False or os.path.exists(file_name_head+".gif")) and (ugoira_mp4==False or os.path.exists(file_name_head+".mp4")) and (html_onefile==False or os.path.exists(file_name_head+".html")):
+                        print("--------------------------------")
+                        print("Title:"+str(illust.title)+" has already downloaded.")
+                        continue
 
                     
 
