@@ -72,7 +72,7 @@ main_saving_direcory_path = "./img/"
 ugoira_gif  = True
 #画質良、ファイルサイズ小、ループしない（再生ソフト次第）、保存場所は直下
 ugoira_mp4  = True
-#画質最高（劣化なし）、ループ、ファイルサイズ大、移動可、保存場所はugoiraフォルダ内、delayが正確
+#画質最高（劣化なし）、ループ、ファイルサイズ大、移動可、保存場所は直下、delayが正確
 html_onefile = True
 
 #Filter by tag　e.g. target_tag = ["Fate/GrandOrder","FGO","FateGO","Fate/staynight"]
