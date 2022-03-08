@@ -76,7 +76,7 @@ main_saving_direcory_path = "./img/"
 ugoira_gif  = True
 #画質良、ファイルサイズ小、ループしない（再生ソフト次第）、保存場所は直下
 ugoira_mp4  = True
-#画質最高（劣化なし）、ループ、ファイルサイズ大、移動可、保存場所はugoiraフォルダ内、delayが正確
+#画質最高（劣化なし）、ループ、ファイルサイズ大、移動可、保存場所は直下、delayが正確
 html_onefile = True
 
 #Filter by tag　e.g. target_tag = ["Fate/GrandOrder","FGO","FateGO","Fate/staynight"]
@@ -188,7 +188,7 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
                     #https://www.pixiv.help/hc/ja/articles/235584428-pixiv%E3%81%AB%E6%8A%95%E7%A8%BF%E3%81%A7%E3%81%8D%E3%82%8B%E7%94%BB%E5%83%8F%E3%81%AE%E7%A8%AE%E9%A1%9E%E3%82%92%E7%9F%A5%E3%82%8A%E3%81%9F%E3%81%84   
                     file_name_head = saving_direcory_path + str(illust.id)+"_p" + str(illust.page_count-1) 
 
-                    if os.path.exists(file_name_head+".png") or os.path.exists(file_name_head+".jpg") or os.path.exists(file_name_head+".jpeg") or os.path.exists(file_name_head+".gif") or os.path.exists(saving_direcory_path+str(illust.id)+'_ugoira'):
+                    if os.path.exists(file_name_head+".png") or os.path.exists(file_name_head+".jpg") or os.path.exists(file_name_head+".jpeg") or os.path.exists(file_name_head+".gif"):
                         tqdm.write("--------------------------------")
                         tqdm.write("Title:"+str(illust.title)+" has already downloaded.")
                         #print("--------------------------------")
@@ -197,7 +197,13 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
                     
                     
 
-
+                    file_name_head = saving_direcory_path + str(illust.id)
+                    if (ugoira_gif==False or os.path.exists(file_name_head+".gif")) and (ugoira_mp4==False or os.path.exists(file_name_head+".mp4")) and (html_onefile==False or os.path.exists(file_name_head+".html")):
+                        tqdm.write("--------------------------------")
+                        tqdm.write("Title:"+str(illust.title)+" has already downloaded.")
+                        #print("--------------------------------")
+                        #print("Title:"+str(illust.title)+" has already downloaded.")
+                        continue
 
                     
 
@@ -251,6 +257,8 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
                         #うごイラに使われているすべての画像のダウンロード(オリジナル) 
                         #高画質低速
                         for frame in tqdm(range(ugoira_frames), desc='ugoiras download', leave=False):
+                            if os.path.exists(f'{dir_name}/{illust_id}_ugoira{frame}{ugoira_url[1]}'):
+                                continue
                             frame_url = ugoira_url[0] + str(frame) + ugoira_url[1]
                             aapi.download(frame_url, path=dir_name)
                             sleep(1)
@@ -360,7 +368,7 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
                             </body>
                             </html>
                             """.format(width=width, height=height, frames=ugoira_frames, illust_id=illust_id, illust_b64=str(illust_b64))
-                            with open(f'{dir_name}/ugoira_onefile.html', 'w', encoding='utf-8') as f:
+                            with open(f'{saving_direcory_path}/{illust_id}.html', 'w', encoding='utf-8') as f:
                                 f.write(html)
 
                             
