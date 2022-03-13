@@ -248,6 +248,10 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
                         width = illust.width
                         dir_name = saving_direcory_path + str(illust_id)+'_ugoira'
                         
+                        #mp4のオーバーフロー対策
+                        if ugoira_delay in (3,6,7,9,11,12,13,14,15):
+                            fps = round(fps,2)
+                        
                         
                         #うごイラを保存するフォルダの作成
                         if not os.path.isdir(dir_name):
