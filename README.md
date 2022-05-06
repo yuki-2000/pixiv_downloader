@@ -1,5 +1,5 @@
 # pixiv_downloader2.0
-pythonのライブラリ「pixivpyを使用した」ダウンローダー
+pythonのライブラリ「pixivpy」を使用したダウンローダー
 
 ## 環境
 windows、anaconda、chromeを前提に作成しています。  
