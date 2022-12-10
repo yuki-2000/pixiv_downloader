@@ -395,6 +395,7 @@ for user_id in tqdm(client_info["ids"], desc='users', leave=False):
                     break                    
                 else:
                     sleep(1)
+                    next_qs.update({"type":None})
                     user_illusts = aapi.user_illusts(**next_qs)
                        
 
