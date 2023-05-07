@@ -22,6 +22,8 @@ https://qiita.com/yuki_2020/items/dc6212b68f3d58bfe34d
 https://qiita.com/yuki_2020/items/716fa4e4ada65306f688
 を見てください。  
 
+20230507　代わり
+https://github.com/yuki-2000/pixiv_downloader/blob/main/article.md
 
 
 1.pixiv_auth.pyを実行してください。  
